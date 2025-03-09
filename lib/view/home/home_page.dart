@@ -394,37 +394,115 @@ class _HomePageState extends State<HomePage>
                       color: Colors.blue,
                     ),
                     controller: tabController,
-                    tabs: [
-                      Container(
-                          padding:
-                              EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                          decoration: BoxDecoration(
-                            // Selected tab background
-                            border: Border.all(
-                                color: Colors.black, width: 2), // Black border
-                            borderRadius:
-                                BorderRadius.circular(8), // Rounded corners
-                          ),
-                          child: Text("Desks")),
-                      Text("Lamps"),
-                      Text("Services")
-                    ]),
+                    tabs: [Text("Desks"), Text("Lamps"), Text("Services")]),
               ),
               SizedBox(
-                height: 300,
+                height: 330,
                 child: TabBarView(controller: tabController, children: [
-                  Text("Bangla"),
+                  Card(
+                    color: Colors.white,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Image.asset(
+                          AppsData.productList[1].image![0],
+                          height: 200,
+                          width: double.infinity,
+                          fit: BoxFit.fill,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "Lamps",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "Desk Lamp",
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w800,
+                                    fontSize: 20),
+                              ),
+                              SizedBox(
+                                height: 7,
+                              ),
+                              Text(
+                                "\$ 1.00",
+                                style: TextStyle(
+                                    color: Colors.blue,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   Text("Bangla"),
                   Text("Bangla"),
                 ]),
               ),
+              SizedBox(
+                height: 20,
+              ),
               Container(
-                decoration: BoxDecoration(),
+                height: 250,
+                padding: EdgeInsets.symmetric(horizontal: 30),
+                width: double.infinity,
+                decoration: BoxDecoration(color: Colors.grey.shade100),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text("Hurry up!"),
-                    Text("Huge SALES"),
-                    Text("Up to 20% off on all products")
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Hurry up!",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 21,
+                              fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          "Huge SALES",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w900),
+                        ),
+                        Text("Up to 20% off on all products",
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 21,
+                                fontWeight: FontWeight.w600))
+                      ],
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15, vertical: 8),
+                      decoration: const BoxDecoration(color: Colors.blue),
+                      child: const Text(
+                        "Shop Now",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ),
                   ],
                 ),
               ),
