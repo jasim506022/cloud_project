@@ -3,8 +3,11 @@ import 'package:cloud_project/res/app_font_style.dart';
 
 import 'package:cloud_project/res/app_function.dart';
 import 'package:cloud_project/res/app_image.dart';
+import 'package:cloud_project/view/cart/cart_view.dart';
+import 'package:cloud_project/view/product/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:get/route_manager.dart';
 
 import '../../res/app_string.dart';
 
@@ -85,7 +88,10 @@ class _HomePageState extends State<HomePage>
     return AppBar(
       title: Image.asset(AppImage.appLogo, height: 80),
       actions: [
-        const badges.Badge(
+        badges.Badge(
+          onTap: () {
+            Get.to(() => ProductPage(), transition: Transition.rightToLeft);
+          },
           badgeStyle: badges.BadgeStyle(badgeColor: AppColors.blue),
           badgeContent: Text('3', style: TextStyle(color: AppColors.white)),
           child: Icon(Icons.shopping_cart_outlined),
