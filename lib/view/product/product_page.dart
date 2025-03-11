@@ -1,12 +1,15 @@
 import 'package:badges/badges.dart' as badges;
+import 'package:cloud_project/model/data.dart';
 import 'package:cloud_project/res/app_font_style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../model/product_model.dart';
 import '../../res/app_colors.dart';
 import '../../res/app_function.dart';
 import '../../res/app_image.dart';
 import '../cart/cart_view.dart';
+import '../home/widget/bottom_details.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -16,6 +19,37 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  List<ProductModel> displayedProducts = [];
+  int currentPage = 1;
+  final int pageSize = 6;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMoreProducts(); // Load initial 10 products
+  }
+
+  // Function to load next 10 products
+  void _loadMoreProducts() async {
+    if (isLoading || displayedProducts.length >= AppsData.productList.length)
+      return;
+
+    setState(() => isLoading = true);
+
+    await Future.delayed(const Duration(seconds: 1)); // Simulate API delay
+
+    int nextIndex = (currentPage - 1) * pageSize;
+    List<ProductModel> newProducts =
+        AppsData.productList.skip(nextIndex).take(pageSize).toList();
+
+    setState(() {
+      displayedProducts.addAll(newProducts);
+      currentPage++;
+      isLoading = false;
+    });
+  }
+
   final List<Map<String, String>> items = [
     {"name": "Desks", "image": "assets/categories/Desks.png"},
     {"name": "Furnitures", "image": "assets/categories/Furnitures.png"},
@@ -27,11 +61,12 @@ class _ProductPageState extends State<ProductPage> {
     {"name": "Services", "image": "assets/categories/Services.png"},
     {"name": "Multimedia", "image": "assets/categories/Multimedia.png"},
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
-      body: Column(
+      body: ListView(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,11 +90,9 @@ class _ProductPageState extends State<ProductPage> {
                         height: 40,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
-                            Icon(Icons.image_not_supported, size: 50),
+                            const Icon(Icons.image_not_supported, size: 50),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Text(
                         items[index]["name"]!,
                         style: AppFontStyle.mediumBoldTextStyle()
@@ -70,7 +103,61 @@ class _ProductPageState extends State<ProductPage> {
                 );
               },
             ),
-          )
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text("Products"), Text("See All")],
+          ),
+          GridView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: displayedProducts.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: .75,
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+            ),
+            itemBuilder: (context, index) {
+              var productModel = displayedProducts[index];
+              return Card(
+                color: AppColors.white,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 130,
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(color: Colors.grey.shade100),
+                      child: Image.asset(
+                        productModel.image![0],
+                        height: 90,
+                        width: 80,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    Text(productModel.title!,
+                        style: AppFontStyle.titleTextStyle()),
+                    Text(productModel.price!.toString(),
+                        style: AppFontStyle.titleTextStyle()),
+                  ],
+                ),
+              );
+            },
+          ),
+          SizedBox(height: 20),
+
+          // "Load More" Button
+          if (displayedProducts.length < AppsData.productList.length)
+            Center(
+              child: ElevatedButton(
+                onPressed: _loadMoreProducts,
+                child: isLoading
+                    ? CircularProgressIndicator(color: Colors.white)
+                    : Text("Load More"),
+              ),
+            ),
+
+          BottomDetails(),
         ],
       ),
     );
