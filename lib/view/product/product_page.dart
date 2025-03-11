@@ -9,7 +9,7 @@ import '../../res/app_colors.dart';
 import '../../res/app_function.dart';
 import '../../res/app_image.dart';
 import '../cart/cart_view.dart';
-import '../home/widget/bottom_details.dart';
+import '../../widget/app_footer_widget.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -129,15 +129,15 @@ class _ProductPageState extends State<ProductPage> {
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(color: Colors.grey.shade100),
                       child: Image.asset(
-                        productModel.image![0],
+                        productModel.image[0],
                         height: 90,
                         width: 80,
                         fit: BoxFit.contain,
                       ),
                     ),
-                    Text(productModel.title!,
+                    Text(productModel.title,
                         style: AppFontStyle.titleTextStyle()),
-                    Text(productModel.price!.toString(),
+                    Text(productModel.price.toString(),
                         style: AppFontStyle.titleTextStyle()),
                   ],
                 ),
@@ -157,7 +157,7 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
 
-          BottomDetails(),
+          AppFooterWidget(),
         ],
       ),
     );

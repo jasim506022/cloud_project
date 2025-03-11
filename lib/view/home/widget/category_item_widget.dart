@@ -1,24 +1,24 @@
-import 'package:cloud_project/res/app_function.dart';
-import 'package:cloud_project/res/app_string.dart';
 import 'package:flutter/material.dart';
 
-import '../../../model/catory_model.dart';
+import '../../../model/category_model.dart';
 import '../../../res/app_colors.dart';
 import '../../../res/app_font_style.dart';
-import '../../../widget/outline_app_button.dart';
+import '../../../res/app_function.dart';
+import '../../../res/app_string.dart';
+import '../../../widget/app_outline_button.dart';
 
-class CategoryViewWidget extends StatelessWidget {
-  const CategoryViewWidget({
+class CategoryItemWidget extends StatelessWidget {
+  const CategoryItemWidget({
     super.key,
-    required this.productModel,
+    required this.categoryModel,
   });
-  final CategoryModel productModel;
+  final CategoryModel categoryModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Container(
-        height: 340,
+        height: 345,
         width: double.infinity,
         decoration:
             BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
@@ -26,23 +26,23 @@ class CategoryViewWidget extends StatelessWidget {
           children: [
             _buildImageSection(),
             AppFunction.verticalSpace(20),
-            _categoryDetails()
+            _buildCategoryDetails()
           ],
         ),
       ),
     );
   }
 
-  Column _categoryDetails() {
+  Column _buildCategoryDetails() {
     return Column(
       children: [
-        Text(productModel.title!, style: AppFontStyle.mediumLargeTitle()),
+        Text(categoryModel.title, style: AppFontStyle.mediumLargeTitle()),
         AppFunction.verticalSpace(13),
-        Text("${AppString.staringFrom} ${productModel.price!}",
+        Text("${AppString.staringFrom} ${categoryModel.price}",
             style:
                 AppFontStyle.mediumTextStyle().copyWith(color: AppColors.grey)),
         AppFunction.verticalSpace(25),
-        OutlineAppButton(onTap: () {}, title: AppString.btnViewProduct),
+        AppOutlineButton(onTap: () {}, title: AppString.btnViewProduct),
         AppFunction.verticalSpace(15),
       ],
     );
@@ -55,9 +55,8 @@ class CategoryViewWidget extends StatelessWidget {
         children: [
           Expanded(
               flex: 6,
-              child: Image.asset(productModel.image![0],
+              child: Image.asset(categoryModel.image[0],
                   height: 170, fit: BoxFit.fill)),
-          AppFunction.horizontalSpace(10),
           AppFunction.horizontalSpace(10),
           Expanded(
             flex: 3,
@@ -67,8 +66,8 @@ class CategoryViewWidget extends StatelessWidget {
               (index) {
                 return Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Image.asset(productModel.image![index + 1],
+                    padding: EdgeInsets.only(bottom: index == 0 ? 8 : 0),
+                    child: Image.asset(categoryModel.image[index + 1],
                         fit: BoxFit.fill, width: double.infinity),
                   ),
                 );

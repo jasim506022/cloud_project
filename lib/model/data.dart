@@ -1,42 +1,50 @@
-import 'package:cloud_project/model/catory_model.dart';
+import 'package:cloud_project/model/category_model.dart';
 import 'package:cloud_project/model/product_model.dart';
+import 'package:cloud_project/res/app_image.dart';
 
-import 'features_model.dart';
+import 'feature_model.dart';
 
 class AppsData {
-  static List<FeaturesModel> get featuresList => [
-        FeaturesModel(
-            title: "Wireless charging",
-            subTitle: "Full Battery in no time",
-            image: "assets/features/charging.png"),
-        FeaturesModel(
-            title: "Super Fast CPU",
-            subTitle: "Powerful Performance",
-            image: "assets/features/cpu.png"),
-        FeaturesModel(
-            title: "128 GB Harddisk",
-            subTitle: "More Content",
-            image: "assets/features/harddisk.png"),
-        FeaturesModel(
-            title: "64 MP Camara",
-            subTitle: "With super Macro Lens",
-            image: "assets/features/camera.png"),
+  static List<FeatureModel> get featuresList => [
+        FeatureModel(
+          title: "Wireless charging",
+          subTitle: "Full Battery in no time",
+          image: AppImage.chargingImage,
+        ),
+        FeatureModel(
+          title: "Super Fast CPU",
+          subTitle: "Powerful Performance",
+          image: AppImage.cpuImage,
+        ),
+        FeatureModel(
+          title: "128 GB Harddisk",
+          subTitle: "More Content",
+          image: AppImage.harddiskImage,
+        ),
+        FeatureModel(
+          title: "64 MP Camera",
+          subTitle: "With super Macro Lens",
+          image: AppImage.cameraImage,
+        ),
       ];
 
-  static List<FeaturesModel> get additionalFeaturesList => [
-        FeaturesModel(
-            title: "FREE SHIPPING",
-            subTitle: "In 2-3 Days",
-            image: "assets/addition_features/shipping.png"),
-        FeaturesModel(
-            title: "FREE RETURNS",
-            subTitle: "No Questions Asked",
-            image: "assets/addition_features/return.png"),
-        FeaturesModel(
-            title: "FREE SUPPORT",
-            subTitle: "30 Days",
-            image: "assets/addition_features/support.png"),
-      ];
+  static List<FeatureModel> additionalFeaturesList = [
+    FeatureModel(
+      title: "FREE SHIPPING",
+      subTitle: "In 2-3 Days",
+      image: AppImage.freeShippingImage,
+    ),
+    FeatureModel(
+      title: "FREE RETURNS",
+      subTitle: "No Questions Asked",
+      image: AppImage.freeReturnsImage,
+    ),
+    FeatureModel(
+      title: "FREE SUPPORT",
+      subTitle: "30 Days",
+      image: AppImage.freeSupportImage,
+    ),
+  ];
 
   static List<CategoryModel> get categoriesList => [
         CategoryModel(title: "Desks", price: 85.00, image: [

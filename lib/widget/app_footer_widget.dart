@@ -1,13 +1,14 @@
+import 'package:cloud_project/res/app_string.dart';
 import 'package:flutter/material.dart';
 
-import '../../../res/app_colors.dart';
-import '../../../res/app_font_style.dart';
-import '../../../res/app_function.dart';
-import '../../../res/app_image.dart';
-import '../../../res/cons.dart';
+import '../res/app_colors.dart';
+import '../res/app_font_style.dart';
+import '../res/app_function.dart';
+import '../res/app_image.dart';
+import '../res/cons.dart';
 
-class BottomDetails extends StatelessWidget {
-  const BottomDetails({
+class AppFooterWidget extends StatelessWidget {
+  const AppFooterWidget({
     super.key,
   });
 
@@ -20,30 +21,28 @@ class BottomDetails extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildNewsletterSection(),
+          _buildSubscriptionSection(),
           AppFunction.verticalSpace(45),
           const Divider(height: 1, color: AppColors.grey),
           AppFunction.verticalSpace(35),
           Image.asset(AppImage.appLogo),
           AppFunction.verticalSpace(20),
-          _buildLogoAndSocialIcons(),
+          _buildSocialMediaIcons(),
           AppFunction.verticalSpace(10),
-          _buildCategorySection()
+          _buildFooterCategories()
         ],
       ),
     );
   }
 
-  // Newsletter Subscription Section
-  Widget _buildNewsletterSection() {
+  /// Builds the newsletter subscription section
+  Widget _buildSubscriptionSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Subscribe to our weekly newsletter",
-          style: AppFontStyle.largeTitle().copyWith(color: AppColors.white),
-        ),
-        const SizedBox(height: 15),
+        Text(AppString.newsletter,
+            style: AppFontStyle.largeTitle().copyWith(color: AppColors.white)),
+        AppFunction.verticalSpace(15),
         Row(
           children: [
             Expanded(
@@ -51,10 +50,10 @@ class BottomDetails extends StatelessWidget {
               child: TextFormField(
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Your Email",
+                  hintText: AppString.emailHint,
                   hintStyle: AppFontStyle.mediumTextStyle()
                       .copyWith(color: AppColors.grey),
-                  fillColor: Colors.white,
+                  fillColor: AppColors.white,
                   filled: true,
                 ),
               ),
@@ -73,12 +72,12 @@ class BottomDetails extends StatelessWidget {
     );
   }
 
-  SizedBox _buildLogoAndSocialIcons() {
+  SizedBox _buildSocialMediaIcons() {
     return SizedBox(
       height: 60,
       width: double.infinity,
       child: ListView.builder(
-        itemCount: 4,
+        itemCount: socialMedia.length,
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return Padding(
@@ -88,6 +87,10 @@ class BottomDetails extends StatelessWidget {
               width: 50,
               decoration: const BoxDecoration(
                   color: AppColors.white, shape: BoxShape.circle),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Image.asset(socialMedia[index]['asset']!),
+              ),
             ),
           );
         },
@@ -96,19 +99,19 @@ class BottomDetails extends StatelessWidget {
   }
 
   // Categories Section
-  Widget _buildCategorySection() {
+  Widget _buildFooterCategories() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Categories",
+          AppString.categories,
           style: AppFontStyle.titleTextStyle().copyWith(color: AppColors.white),
         ),
         const Padding(
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Divider(height: 1, color: AppColors.grey),
         ),
-        ...categoriesBttom.map((category) => Padding(
+        ...categoriesBottom.map((category) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 7),
               child: Text(
                 category,

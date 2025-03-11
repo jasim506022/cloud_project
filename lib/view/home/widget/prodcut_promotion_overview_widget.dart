@@ -1,21 +1,20 @@
-import 'package:cloud_project/res/app_font_style.dart';
-import 'package:cloud_project/res/app_image.dart';
-import 'package:cloud_project/res/app_string.dart';
 import 'package:flutter/material.dart';
 
+import '../../../res/app_colors.dart';
+import '../../../res/app_font_style.dart';
 import '../../../res/app_function.dart';
+import '../../../res/app_image.dart';
+import '../../../res/app_string.dart';
 import '../../../res/cons.dart';
 import '../../../widget/app_button.dart';
 
-class NewProductOverviewWidget extends StatelessWidget {
-  const NewProductOverviewWidget({
+class ProductPromotionOverviewWidget extends StatelessWidget {
+  const ProductPromotionOverviewWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    // List of product features
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -57,7 +56,7 @@ class NewProductOverviewWidget extends StatelessWidget {
             height: 60,
             width: 60,
             decoration: const BoxDecoration(
-                color: Colors.green, shape: BoxShape.circle),
+                color: AppColors.green, shape: BoxShape.circle),
             child: Center(
                 child: Text(
               AppString.btnNew,

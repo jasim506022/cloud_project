@@ -1,26 +1,16 @@
-import 'package:cloud_project/res/app_colors.dart';
-import 'package:cloud_project/res/app_font_style.dart';
-
 import 'package:cloud_project/res/app_function.dart';
-import 'package:cloud_project/res/app_image.dart';
-import 'package:cloud_project/view/cart/cart_view.dart';
-import 'package:cloud_project/view/product/product_page.dart';
+
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
-import 'package:get/route_manager.dart';
 
-import '../../res/app_string.dart';
+import '../../model/data.dart';
+import '../../widget/app_footer_widget.dart';
+import 'widget/category_item_widget.dart';
+import 'widget/limited_offer_widget.dart';
+import 'widget/prodcut_promotion_overview_widget.dart';
 
-import '../../widget/app_button.dart';
-import 'widget/additional_feature_list_widget.dart';
-import 'widget/bottom_details.dart';
-import 'widget/category_view_list.dart';
-import 'widget/huge_sales_widget.dart';
-import 'widget/new_product_overview_widget.dart';
-
-import 'widget/product_category_tab.dart';
-import 'widget/product_details_widget.dart';
-import 'widget/team_create_widget.dart';
+import 'widget/product_categories_tab.dart';
+import 'widget/proudct_feature_widget.dart';
+import 'widget/create_team_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -44,8 +34,6 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      drawer: const Drawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -54,50 +42,37 @@ class _HomePageState extends State<HomePage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const ProductDetailWidget(),
-                  AppFunction.verticalSpace(15),
-                  AppButton(
-                    title: AppString.btnShowNow,
-                    onTap: () {},
-                  ),
-                  AppFunction.verticalSpace(20),
-                  const AdditionalFeatureListWidget(),
+                  const ProductFeatureWidget(),
                   AppFunction.verticalSpace(30),
-                  const CateoryViewListWidget(),
+                  _cateryList(),
                   AppFunction.verticalSpace(30),
-                  const NewProductOverviewWidget(),
+                  const ProductPromotionOverviewWidget(),
                   AppFunction.verticalSpace(50),
-                  const TeamCreateWidget(),
+                  const CreativeTeamWidget(),
                   AppFunction.verticalSpace(50),
-                  ProductCategoryTab(tabController: tabController),
+                  ProductCategoriesTab(tabController: tabController),
                   AppFunction.verticalSpace(20),
-                  const HugeSalesWidget(),
+                  const LimitedOfferWidget(),
                   AppFunction.verticalSpace(20),
                 ],
               ),
             ),
-            const BottomDetails()
+            const AppFooterWidget()
           ],
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
-  AppBar _buildAppBar() {
-    return AppBar(
-      title: Image.asset(AppImage.appLogo, height: 80),
-      actions: [
-        badges.Badge(
-          onTap: () {
-            Get.to(() => ProductPage(), transition: Transition.rightToLeft);
-          },
-          badgeStyle: badges.BadgeStyle(badgeColor: AppColors.blue),
-          badgeContent: Text('3', style: TextStyle(color: AppColors.white)),
-          child: Icon(Icons.shopping_cart_outlined),
-        ),
-        AppFunction.horizontalSpace(20),
-      ],
+  ListView _cateryList() {
+    return ListView.builder(
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: AppsData.categoriesList.length,
+      shrinkWrap: true,
+      itemBuilder: (context, index) {
+        var categoryModel = AppsData.categoriesList[index];
+        return CategoryItemWidget(categoryModel: categoryModel);
+      },
     );
   }
 }

@@ -40,6 +40,10 @@ dependencies:
   flutter_carousel_widget: ^3.1.0
   get: ^4.7.2
   convex_bottom_bar: ^3.2.0
+  flutter_floating_bottom_bar: ^1.2.1+1
+  salomon_bottom_bar: ^3.3.2
+  convex_bottom_app_bar: ^1.0.9
+  persistent_bottom_nav_bar: ^6.2.1
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +76,7 @@ flutter:
    - assets/products/lamps/
    - assets/products/Service/
    - assets/categories/
+   - assets/social/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -20,10 +20,7 @@ class AppButton extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         decoration: BoxDecoration(
             color: AppColors.blue, borderRadius: BorderRadius.circular(10)),
-        child: Text(
-          title,
-          style: AppFontStyle.buttonTextStyle(),
-        ),
+        child: Text(title, style: AppFontStyle.buttonTextStyle()),
       ),
     );
   }

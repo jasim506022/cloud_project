@@ -16,39 +16,38 @@ class ProductCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Colors.white,
+      color: AppColors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.asset(
-            productModel.image![0],
+            productModel.image.first,
             height: 200,
             width: double.infinity,
             fit: BoxFit.fill,
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppFunction.verticalSpace(10),
-                Text(productModel.category!,
-                    style: AppFontStyle.mediumBoldTextStyle()
-                        .copyWith(color: AppColors.grey)),
-                AppFunction.verticalSpace(5),
-                Text(
-                  productModel.title!,
-                  style: AppFontStyle.titleTextStyle(),
-                ),
-                AppFunction.verticalSpace(5),
-                Text(
-                  "\$ ${productModel.price}",
-                  style: AppFontStyle.titleTextStyle()
-                      .copyWith(color: AppColors.blue),
-                ),
-              ],
-            ),
-          )
+          _buildProductDetails()
+        ],
+      ),
+    );
+  }
+
+  Padding _buildProductDetails() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AppFunction.verticalSpace(10),
+          Text(productModel.category,
+              style: AppFontStyle.mediumBoldTextStyle()
+                  .copyWith(color: AppColors.grey)),
+          AppFunction.verticalSpace(5),
+          Text(productModel.title, style: AppFontStyle.titleTextStyle()),
+          AppFunction.verticalSpace(5),
+          Text("\$ ${productModel.price}",
+              style: AppFontStyle.titleTextStyle()
+                  .copyWith(color: AppColors.blue)),
         ],
       ),
     );

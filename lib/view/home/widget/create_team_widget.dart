@@ -6,8 +6,8 @@ import '../../../res/app_font_style.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_string.dart';
 
-class TeamCreateWidget extends StatelessWidget {
-  const TeamCreateWidget({
+class CreativeTeamWidget extends StatelessWidget {
+  const CreativeTeamWidget({
     super.key,
   });
 
@@ -19,17 +19,17 @@ class TeamCreateWidget extends StatelessWidget {
         AppFunction.verticalSpace(15),
         RichText(
             text: TextSpan(
-                text: "Our Creative ",
+                text: "${AppString.ourCreative} ",
                 style: AppFontStyle.largeTitle(),
                 children: [
               TextSpan(
-                  text: "Team",
+                  text: AppString.team,
                   style:
                       AppFontStyle.largeTitle().copyWith(color: AppColors.blue))
             ])),
         AppFunction.verticalSpace(15),
         Text(
-          AppString.teamCreateDiscription,
+          AppString.teamCreateDescription,
           textAlign: TextAlign.center,
           style: AppFontStyle.titleTextStyle(),
         ),

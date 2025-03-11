@@ -9,12 +9,19 @@ final List<String> features = [
   "Easy Returns",
 ];
 
-final List<String> categories = ["Desks", "Lamps", "Services"];
+final List<String> categoryList = ["Desks", "Lamps", "Services"];
 
-const List<String> categoriesBttom = [
+const List<String> categoriesBottom = [
   "Athletic Apparel",
   "Sneakers & Athletic",
   "Sunglasses & Eyewear",
   "Jeans",
   "Others"
+];
+
+final List<Map<String, String>> socialMedia = [
+  {'name': 'Facebook', 'asset': 'assets/social/facebook.png'},
+  {'name': 'Twitter', 'asset': 'assets/social/twitter.png'},
+  {'name': 'Instagram', 'asset': 'assets/social/instagram.png'},
+  {'name': 'LinkedIn', 'asset': 'assets/social/linkedin.png'},
 ];
