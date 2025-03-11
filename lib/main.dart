@@ -1,11 +1,14 @@
 import 'package:cloud_project/res/app_colors.dart';
 import 'package:cloud_project/res/app_font_style.dart';
+import 'package:cloud_project/res/app_route.dart';
+import 'package:cloud_project/res/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'view/main/main_page.dart.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -20,7 +23,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.white,
-        appBarTheme: const AppBarTheme(
+        appBarTheme: AppBarTheme(
+            titleTextStyle: AppFontStyle.mediumLargeTitle(),
             backgroundColor: AppColors.white,
             centerTitle: true,
             actionsIconTheme: IconThemeData(color: AppColors.black, size: 30)),
@@ -32,7 +36,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MainPage(),
+      initialRoute: RouteName.mainPage,
+      getPages: AppRoute.appRoute(),
     );
   }
 }

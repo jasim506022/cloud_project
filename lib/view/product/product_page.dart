@@ -8,7 +8,7 @@ import '../../model/product_model.dart';
 import '../../res/app_colors.dart';
 import '../../res/app_function.dart';
 import '../../res/app_image.dart';
-import '../cart/cart_view.dart';
+import '../cart/cart_page.dart';
 import '../../widget/app_footer_widget.dart';
 
 class ProductPage extends StatefulWidget {
@@ -65,100 +65,149 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      body: ListView(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Categories"), Text("See All")],
-          ),
-          SizedBox(
-            height: 100,
-            width: double.infinity,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        child: ListView(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Categories",
+                  style: AppFontStyle.mediumLargeTitle(),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      "See All",
+                      style: AppFontStyle.mediumBoldTextStyle()
+                          .copyWith(color: AppColors.blue),
+                    ),
+                    const Icon(
+                      Icons.arrow_forward_ios,
+                      color: AppColors.blue,
+                      size: 20,
+                    )
+                  ],
+                )
+              ],
+            ),
+
+            AppFunction.verticalSpace(15),
+            SizedBox(
+              height: 100,
+              width: double.infinity,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                itemCount: items.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          items[index]["image"]!,
+                          width: 40,
+                          height: 35,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) =>
+                              const Icon(Icons.image_not_supported, size: 50),
+                        ),
+                        AppFunction.verticalSpace(8),
+                        Text(
+                          items[index]["name"]!,
+                          style: AppFontStyle.mediumBoldTextStyle()
+                              .copyWith(color: AppColors.blue),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Shop",
+                  style: AppFontStyle.mediumLargeTitle(),
+                ),
+                Text(
+                  "35 items found",
+                  style: AppFontStyle.mediumBoldTextStyle(),
+                )
+              ],
+            ),
+
+            AppFunction.verticalSpace(15),
+
+            GridView.builder(
               shrinkWrap: true,
-              itemCount: items.length,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: displayedProducts.length,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: .75,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 6,
+              ),
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                var productModel = displayedProducts[index];
+                return Card(
+                  color: AppColors.white,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.asset(
-                        items[index]["image"]!,
-                        width: 40,
-                        height: 40,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            const Icon(Icons.image_not_supported, size: 50),
+                      Container(
+                        height: 130,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(color: Colors.grey.shade100),
+                        child: Image.asset(
+                          productModel.image[0],
+                          height: 130,
+                          width: Get.width,
+                          fit: BoxFit.contain,
+                        ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
-                        items[index]["name"]!,
-                        style: AppFontStyle.mediumBoldTextStyle()
-                            .copyWith(color: AppColors.blue),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(productModel.title,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: AppFontStyle.mediumBoldTextStyle()
+                                    .copyWith(color: AppColors.blue)),
+                            Text(productModel.price.toString(),
+                                style: AppFontStyle.titleTextStyle()
+                                    .copyWith(color: AppColors.blue)),
+                          ],
+                        ),
                       ),
                     ],
                   ),
                 );
               },
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text("Products"), Text("See All")],
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: displayedProducts.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: .75,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-            ),
-            itemBuilder: (context, index) {
-              var productModel = displayedProducts[index];
-              return Card(
-                color: AppColors.white,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 130,
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(color: Colors.grey.shade100),
-                      child: Image.asset(
-                        productModel.image[0],
-                        height: 90,
-                        width: 80,
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                    Text(productModel.title,
-                        style: AppFontStyle.titleTextStyle()),
-                    Text(productModel.price.toString(),
-                        style: AppFontStyle.titleTextStyle()),
-                  ],
+            SizedBox(height: 20),
+
+            // "Load More" Button
+            if (displayedProducts.length < AppsData.productList.length)
+              Center(
+                child: ElevatedButton(
+                  onPressed: _loadMoreProducts,
+                  child: isLoading
+                      ? CircularProgressIndicator(color: Colors.white)
+                      : Text("Load More"),
                 ),
-              );
-            },
-          ),
-          SizedBox(height: 20),
-
-          // "Load More" Button
-          if (displayedProducts.length < AppsData.productList.length)
-            Center(
-              child: ElevatedButton(
-                onPressed: _loadMoreProducts,
-                child: isLoading
-                    ? CircularProgressIndicator(color: Colors.white)
-                    : Text("Load More"),
               ),
-            ),
 
-          AppFooterWidget(),
-        ],
+            AppFooterWidget(),
+          ],
+        ),
       ),
     );
   }
@@ -169,7 +218,7 @@ class _ProductPageState extends State<ProductPage> {
       actions: [
         badges.Badge(
           onTap: () {
-            Get.to(() => CartView(), transition: Transition.rightToLeft);
+            Get.to(() => CartPage(), transition: Transition.rightToLeft);
           },
           badgeStyle: badges.BadgeStyle(badgeColor: AppColors.blue),
           badgeContent: Text('3', style: TextStyle(color: AppColors.white)),

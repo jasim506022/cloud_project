@@ -12,11 +12,15 @@ class AppString {
   static const String ourCreative = "Our Creative";
   static const String team = "Team";
   static const String emailHint = "Your Email";
+  static const String searchHint = "Search...";
   static const String newsletter = "Subscribe to our weekly newsletter";
   static const String hurryUp = "Hurry up!";
   static const String hugeSales = "Huge SALES";
   static const String discountProduct = "Up to 20% off on all products";
   static const String bluetoothHeadset = "Bluetooth Headset";
+  static const String yourCartTitle = "Your Cart";
+  static const String searchTitle = "Search";
+
   static const String teamCreateDescription =
       "The price of Havit H202d Headphone & Microphone starts from 500 . The price may vary due to .";
   static const String productDescrition =
