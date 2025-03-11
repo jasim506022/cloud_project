@@ -12,6 +12,16 @@ class AppFontStyle {
         fontSize: 15, fontWeight: FontWeight.w400, color: Colors.black);
   }
 
+  static TextStyle bottomTextStyle() {
+    return const TextStyle(
+        fontSize: 13, fontWeight: FontWeight.w400, color: Colors.black);
+  }
+
+  static TextStyle bottomSelectTextStyle() {
+    return const TextStyle(
+        fontSize: 13, fontWeight: FontWeight.w700, color: Colors.black);
+  }
+
   static TextStyle mediumBoldTextStyle() {
     return const TextStyle(
         fontSize: 15, fontWeight: FontWeight.w700, color: Colors.black);

@@ -1,15 +1,14 @@
 import 'package:cloud_project/res/app_colors.dart';
+import 'package:cloud_project/res/app_font_style.dart';
 import 'package:cloud_project/res/route_name.dart';
-import 'package:cloud_project/view/home/home_page.dart';
+import 'package:cloud_project/view/product/product_page.dart';
 import 'package:flutter/material.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:get/get.dart';
 
 import '../../res/app_function.dart';
 import '../../res/app_image.dart';
-import '../product/product_page.dart';
-import '../search/search_page.dart';
+import '../home/home_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -19,101 +18,106 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _currentIndex = 0;
+  int _selectedIndex = 0;
   bool _isExpanded = false;
+
+  final List<Widget> _pages = [
+    const HomePage(),
+    const SizedBox.shrink(),
+    const SizedBox.shrink(),
+    const ProductPage(),
+    const SizedBox.shrink(),
+  ];
+
+  void _onItemTapped(int index) {
+    if (index == 2) {
+      setState(() => _isExpanded = !_isExpanded);
+      return;
+    } else if (index == 1) {
+      Get.toNamed(RouteName.searchPage);
+    } else if (index == 4) {
+      Get.toNamed(RouteName.profilePage);
+    } else if (_selectedIndex != index) {
+      setState(() {
+        _selectedIndex = index;
+        _isExpanded = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(75), child: _buildAppBar()),
       drawer: const Drawer(),
-      body: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
-          _currentIndex == 0 ? const HomePage() : const ProductPage(),
-
-          Positioned(
-            bottom: 0, // Appears at the bottom of the screen
-            left: 0,
-            right: 0,
-            child: Visibility(
-              visible: _isExpanded,
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: SizedBox(
+        height: _isExpanded ? 150 : 80,
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
+            Positioned(
+              bottom: _isExpanded ? 75 : 0,
+              left: 0,
+              right: 0,
+              child: BottomNavigationBar(
+                elevation: 0,
+                backgroundColor: Colors.white,
+                currentIndex: _selectedIndex,
+                selectedItemColor: AppColors.blue,
+                unselectedItemColor: AppColors.grey,
+                selectedLabelStyle: AppFontStyle.bottomSelectTextStyle(),
+                onTap: _onItemTapped,
+                items: [
+                  _navItem(Icons.home, "Home"),
+                  _navItem(Icons.search, "Search"),
+                  BottomNavigationBarItem(
+                    icon: Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            color: Colors.black87, shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.grid_view,
+                          color: Colors.white,
+                        )),
+                    label: "More",
+                  ),
+                  _navItem(Icons.favorite, "WishList"),
+                  _navItem(Icons.person, "Account"),
+                ],
+              ),
+            ),
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 300),
+              bottom: _isExpanded ? 0 : -70,
+              left: 0,
+              right: 0,
               child: Container(
+                height: 62,
                 color: Colors.white,
-                padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    _extraItem(Icons.settings, "Settings"),
-                    _extraItem(Icons.notifications, "Alerts"),
-                    _extraItem(Icons.help, "Help"),
+                    _menuItem(Icons.local_offer_outlined, "Offers"),
+                    _menuItem(Icons.branding_watermark_outlined, "Brands"),
+                    _menuItem(Icons.category_outlined, "Category"),
+                    _menuItem(Icons.shopping_cart_outlined, "Orders"),
                   ],
                 ),
               ),
             ),
-          ),
-
-          // Main Bottom Navigation Bar
-          Positioned(
-            bottom: _isExpanded ? 60 : 0,
-            left: 0,
-            right: 0,
-            child: ConvexAppBar(
-              curveSize: 0,
-              height: 80,
-              backgroundColor: Colors.white,
-              style: TabStyle.fixed,
-              activeColor: Colors.black,
-              color: Colors.grey,
-              cornerRadius: 0,
-              items: [
-                const TabItem(icon: Icons.home, title: "Home"),
-                const TabItem(icon: Icons.search, title: "Search"),
-                TabItem(
-                    icon: Container(
-                  decoration: BoxDecoration(
-                      color: AppColors.black.withOpacity(.7),
-                      shape: BoxShape.circle),
-                  child: const Icon(
-                    Icons.menu_book_sharp,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                )), // Middle Button// Middle Button
-                const TabItem(icon: Icons.favorite, title: "Favorites"),
-                const TabItem(icon: Icons.person, title: "Profile"),
-              ],
-              initialActiveIndex: _currentIndex,
-              onTap: (index) {
-                if (index == 1) {
-                  // Navigate to Search page
-                  Get.toNamed(RouteName.searchPage);
-                }
-
-                if (index == 2) {
-                  setState(() => _isExpanded = !_isExpanded);
-                } else {
-                  setState(() {
-                    _currentIndex = index;
-                    _isExpanded = false;
-                  });
-                }
-              },
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
-  Widget _extraItem(IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(icon, size: 28, color: Colors.blue),
-        Text(label, style: TextStyle(fontSize: 12, color: Colors.black)),
-      ],
-    );
+  BottomNavigationBarItem _navItem(
+    IconData icon,
+    String label,
+  ) {
+    return BottomNavigationBarItem(icon: Icon(icon), label: label);
   }
 
   AppBar _buildAppBar() {
@@ -121,14 +125,26 @@ class _MainPageState extends State<MainPage> {
       title: Image.asset(AppImage.appLogo, height: 80),
       actions: [
         badges.Badge(
-          onTap: () {
-            Get.toNamed(RouteName.cartPage);
-          },
-          badgeStyle: badges.BadgeStyle(badgeColor: AppColors.blue),
-          badgeContent: Text('3', style: TextStyle(color: AppColors.white)),
-          child: Icon(Icons.shopping_cart_outlined),
+          onTap: () => Get.toNamed(RouteName.cartPage),
+          badgeStyle: const badges.BadgeStyle(badgeColor: AppColors.blue),
+          badgeContent:
+              const Text('3', style: TextStyle(color: AppColors.white)),
+          child: const Icon(Icons.shopping_cart_outlined),
         ),
         AppFunction.horizontalSpace(20),
+      ],
+    );
+  }
+
+  Widget _menuItem(IconData icon, String title) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(icon, color: Colors.black54),
+        const SizedBox(height: 5),
+        Text(title,
+            style:
+                AppFontStyle.bottomTextStyle().copyWith(color: Colors.black54)),
       ],
     );
   }

@@ -5,8 +5,6 @@ import 'package:cloud_project/res/route_name.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'view/main/main_page.dart.dart';
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
@@ -19,7 +17,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: AppColors.white,
@@ -27,7 +24,8 @@ class MyApp extends StatelessWidget {
             titleTextStyle: AppFontStyle.mediumLargeTitle(),
             backgroundColor: AppColors.white,
             centerTitle: true,
-            actionsIconTheme: IconThemeData(color: AppColors.black, size: 30)),
+            actionsIconTheme:
+                const IconThemeData(color: AppColors.black, size: 30)),
         tabBarTheme: TabBarTheme(
           unselectedLabelStyle: AppFontStyle.mediumTextStyle(),
           labelStyle: AppFontStyle.buttonTextStyle(),

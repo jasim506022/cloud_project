@@ -20,6 +20,12 @@ class AppString {
   static const String bluetoothHeadset = "Bluetooth Headset";
   static const String yourCartTitle = "Your Cart";
   static const String searchTitle = "Search";
+  static const String seeAll = "See All";
+  static const String shop = "Shop";
+  static const String itemFound = "35 items found";
+  static const String loadMore = "Load More";
+  static const String profileName = "Md Jasim Uddin";
+  static const String email = "jasimrony50@gmail.com";
 
   static const String teamCreateDescription =
       "The price of Havit H202d Headphone & Microphone starts from 500 . The price may vary due to .";
