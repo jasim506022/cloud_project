@@ -10,14 +10,13 @@ Cloud Project is a Flutter-based e-commerce application that provides seamless s
 - 🛒 **Cart Page** - View and manage your shopping cart.
 - ⚡ **GetX State Management** - Efficient navigation and data handling.
 
-## 📸 Screenshots
-(Include screenshots of your app here)
+
 
 ## 🛠️ Tech Stack
 - **Framework**: Flutter
 - **State Management**: GetX
 - **UI Design**: Material Design
-- **Backend (optional)**: Firebase / REST API (if applicable)
+
 
 ## 📂 Project Structure
 ```
@@ -36,7 +35,7 @@ cloud_project/
 ## 🛠️ Installation & Setup
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/cloud_project.git
+   git clone https://github.com/jasim506022/cloud_project.git
    cd cloud_project
    ```
 2. **Install Dependencies**
