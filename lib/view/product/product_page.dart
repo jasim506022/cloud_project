@@ -84,16 +84,19 @@ class ProductPage extends StatelessWidget {
 //Load More Button
   Center _buildLoadMoreButton(ProductController productController) {
     return Center(
-      child: Obx(() => ElevatedButton(
-            style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-                backgroundColor: AppColors.blue),
-            onPressed: productController.loadMoreProducts,
-            child: productController.isLoading.value
-                ? const CircularProgressIndicator(color: AppColors.white)
-                : Text(AppString.loadMore,
-                    style: AppFontStyle.buttonTextStyle()),
+      child: Obx(() => SizedBox(
+            height: 50,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+                  backgroundColor: AppColors.blue),
+              onPressed: productController.loadMoreProducts,
+              child: productController.isLoading.value
+                  ? const CircularProgressIndicator(color: AppColors.white)
+                  : Text(AppString.loadMore,
+                      style: AppFontStyle.buttonTextStyle()),
+            ),
           )),
     );
   }

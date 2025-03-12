@@ -17,8 +17,8 @@ class CategoryItemWidget extends StatelessWidget {
       child: Container(
         height: 345,
         width: double.infinity,
-        decoration:
-            BoxDecoration(border: Border.all(color: AppColors.grey, width: 1)),
+        decoration: BoxDecoration(
+            border: Border.all(color: AppColors.lightGrey, width: 2)),
         child: Column(
           children: [
             _buildImageSection(),

@@ -13,15 +13,13 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: themeData(),
-      initialRoute: RouteName.mainPage,
-      getPages: AppRoute.appRoute(),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: themeData(),
+        initialRoute: RouteName.mainPage,
+        getPages: AppRoute.appRoute());
   }
 
   ThemeData themeData() {
@@ -38,9 +36,7 @@ class MyApp extends StatelessWidget {
         labelStyle: AppFontStyle.buttonTextStyle(),
         dividerColor: Colors.transparent,
       ),
-      cardTheme: const CardTheme(
-        color: AppColors.white,
-      ),
+      cardTheme: const CardTheme(color: AppColors.white),
     );
   }
 }
