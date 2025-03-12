@@ -23,8 +23,9 @@ Cloud Project is a Flutter-based e-commerce application that provides seamless s
 cloud_project/
 │── lib/
 │   ├── controller/       # GetX controllers
+│   ├── controller/       # Data
 │   ├── model/            # Data models
-│   ├── res/              # Resources (colors, strings, styles)
+│   ├── res/              # Resources 
 │   ├── view/             # UI screens
 │   ├── widget/           # Reusable widgets
 │   ├── main.dart         # Entry point
