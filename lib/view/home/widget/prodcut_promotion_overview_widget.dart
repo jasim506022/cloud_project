@@ -5,7 +5,7 @@ import '../../../res/app_font_style.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_image.dart';
 import '../../../res/app_string.dart';
-import '../../../res/cons.dart';
+import '../../../res/app_constant.dart';
 import '../../../widget/app_button.dart';
 
 class ProductPromotionOverviewWidget extends StatelessWidget {
@@ -22,14 +22,12 @@ class ProductPromotionOverviewWidget extends StatelessWidget {
         AppFunction.verticalSpace(30),
         _buildProductDetails(),
         AppFunction.verticalSpace(20),
-        AppButton(
-          title: AppString.btnShowNow,
-          onTap: () {},
-        ),
+        AppButton(title: AppString.btnShowNow, onTap: () {}),
       ],
     );
   }
 
+// product details section (title, description, etc.)
   Column _buildProductDetails() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,11 +38,12 @@ class ProductPromotionOverviewWidget extends StatelessWidget {
         Text(AppString.productDescrition,
             style: AppFontStyle.mediumTextStyle()),
         AppFunction.verticalSpace(15),
-        _buildProductFeatures(),
+        _buildProductFeatures()
       ],
     );
   }
 
+// product image section with a badge on top
   Stack _buildProductImage() {
     return Stack(
       children: [
@@ -58,10 +57,8 @@ class ProductPromotionOverviewWidget extends StatelessWidget {
             decoration: const BoxDecoration(
                 color: AppColors.green, shape: BoxShape.circle),
             child: Center(
-                child: Text(
-              AppString.btnNew,
-              style: AppFontStyle.buttonTextStyle(),
-            )),
+                child: Text(AppString.btnNew,
+                    style: AppFontStyle.buttonTextStyle())),
           ),
         ),
       ],
@@ -72,12 +69,12 @@ class ProductPromotionOverviewWidget extends StatelessWidget {
   Widget _buildProductFeatures() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: features.map((feature) {
-        return Text(
-          "✔  $feature",
-          style: AppFontStyle.mediumBoldTextStyle(),
-        );
-      }).toList(),
+      children: AppConstant.features
+          .map((feature) => Text(
+                "✔  $feature",
+                style: AppFontStyle.mediumBoldTextStyle(),
+              ))
+          .toList(),
     );
   }
 }

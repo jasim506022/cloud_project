@@ -1,10 +1,10 @@
-import 'package:cloud_project/res/app_font_style.dart';
-import 'package:cloud_project/res/app_string.dart';
 import 'package:flutter/material.dart';
 
 import '../../controller/product_controller.dart';
 import '../../res/app_colors.dart';
+import '../../res/app_font_style.dart';
 import '../../res/app_function.dart';
+import '../../res/app_string.dart';
 import '../../widget/app_footer_widget.dart';
 import 'widget/category_widget.dart';
 import 'widget/product_widget.dart';
@@ -43,6 +43,7 @@ class ProductPage extends StatelessWidget {
     );
   }
 
+//Section Header
   Widget _buildSectionHeader(String title, String actionText) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,12 +61,13 @@ class ProductPage extends StatelessWidget {
     );
   }
 
+// Product Grid
   Widget _buildProductGrid(ProductController productController) {
     return Obx(() => GridView.builder(
           controller: productController.scrollController,
           shrinkWrap: true,
           physics: const BouncingScrollPhysics(),
-          itemCount: productController.displayedProducts.length,
+          itemCount: productController.displayProductList.length,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: .78,
@@ -73,12 +75,13 @@ class ProductPage extends StatelessWidget {
             crossAxisSpacing: 6,
           ),
           itemBuilder: (context, index) {
-            var productModel = productController.displayedProducts[index];
+            var productModel = productController.displayProductList[index];
             return ProductWidget(productModel: productModel);
           },
         ));
   }
 
+//Load More Button
   Center _buildLoadMoreButton(ProductController productController) {
     return Center(
       child: Obx(() => ElevatedButton(

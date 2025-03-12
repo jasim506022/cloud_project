@@ -7,39 +7,41 @@ import '../../../res/app_function.dart';
 
 class FeatureItemWidget extends StatelessWidget {
   const FeatureItemWidget(
-      {super.key, required this.featureModel, this.isAdditionFeature = false});
+      {super.key, required this.featureModel, required this.isAdditionFeature});
   final FeatureModel featureModel;
 
-  final bool? isAdditionFeature;
+  final bool isAdditionFeature;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          vertical: 15, horizontal: isAdditionFeature! ? 0 : 15),
+          vertical: 15, horizontal: isAdditionFeature ? 0 : 15),
       child: SizedBox(
-        height: isAdditionFeature! ? 45 : 60,
+        height: isAdditionFeature ? 45 : 60,
         child: Row(
           children: [
             _buildFeatureImage(),
             AppFunction.horizontalSpace(25),
-            _featureText()
+            _buildFeatureText()
           ],
         ),
       ),
     );
   }
 
+//image widget
   Widget _buildFeatureImage() {
     return Image.asset(
       featureModel.image,
-      height: isAdditionFeature! ? 40 : 50,
-      width: isAdditionFeature! ? 40 : 70,
-      color: isAdditionFeature! ? null : AppColors.orange,
+      height: isAdditionFeature ? 40 : 50,
+      width: isAdditionFeature ? 40 : 70,
+      color: isAdditionFeature ? null : AppColors.orange,
     );
   }
 
-  Column _featureText() {
+// text widget
+  Column _buildFeatureText() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,

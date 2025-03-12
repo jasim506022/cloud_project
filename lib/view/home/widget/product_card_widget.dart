@@ -16,7 +16,6 @@ class ProductCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -32,6 +31,7 @@ class ProductCardWidget extends StatelessWidget {
     );
   }
 
+//  details (category, title, price) for the product
   Padding _buildProductDetails() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),

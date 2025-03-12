@@ -8,10 +8,7 @@ import '../../../res/app_string.dart';
 import '../../../widget/app_outline_button.dart';
 
 class CategoryItemWidget extends StatelessWidget {
-  const CategoryItemWidget({
-    super.key,
-    required this.categoryModel,
-  });
+  const CategoryItemWidget({super.key, required this.categoryModel});
   final CategoryModel categoryModel;
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,7 @@ class CategoryItemWidget extends StatelessWidget {
         height: 345,
         width: double.infinity,
         decoration:
-            BoxDecoration(border: Border.all(color: Colors.grey, width: 1)),
+            BoxDecoration(border: Border.all(color: AppColors.grey, width: 1)),
         child: Column(
           children: [
             _buildImageSection(),
@@ -33,6 +30,7 @@ class CategoryItemWidget extends StatelessWidget {
     );
   }
 
+//category's text details (title, price, and button)
   Column _buildCategoryDetails() {
     return Column(
       children: [
@@ -48,6 +46,7 @@ class CategoryItemWidget extends StatelessWidget {
     );
   }
 
+// Section with images
   SizedBox _buildImageSection() {
     return SizedBox(
       height: 170,
@@ -65,12 +64,11 @@ class CategoryItemWidget extends StatelessWidget {
               2,
               (index) {
                 return Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: index == 0 ? 8 : 0),
-                    child: Image.asset(categoryModel.image[index + 1],
-                        fit: BoxFit.fill, width: double.infinity),
-                  ),
-                );
+                    child: Padding(
+                  padding: EdgeInsets.only(bottom: index == 0 ? 8 : 0),
+                  child: Image.asset(categoryModel.image[index + 1],
+                      fit: BoxFit.fill, width: double.infinity),
+                ));
               },
             )),
           )

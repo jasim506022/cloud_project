@@ -1,11 +1,11 @@
-import 'package:cloud_project/model/category_model.dart';
-import 'package:cloud_project/model/product_model.dart';
-import 'package:cloud_project/res/app_image.dart';
-
-import 'feature_model.dart';
+import '../res/app_image.dart';
+import '../model/category_model.dart';
+import '../model/feature_model.dart';
+import '../model/product_model.dart';
 
 class AppsData {
-  static List<FeatureModel> get featuresList => [
+  // Main features
+  static List<FeatureModel> get mainFeaturesList => [
         FeatureModel(
           title: "Wireless charging",
           subTitle: "Full Battery in no time",
@@ -28,6 +28,7 @@ class AppsData {
         ),
       ];
 
+// Additional Features
   static List<FeatureModel> additionalFeaturesList = [
     FeatureModel(
       title: "FREE SHIPPING",
@@ -46,6 +47,7 @@ class AppsData {
     ),
   ];
 
+// categories
   static List<CategoryModel> get categoriesList => [
         CategoryModel(title: "Desks", price: 85.00, image: [
           "assets/products/Desks/desk_one.jpg",
@@ -64,6 +66,7 @@ class AppsData {
         ]),
       ];
 
+//List of products
   static List<ProductModel> get productList => [
         ProductModel(
             title: "Desks & Computer Desks ",

@@ -28,11 +28,9 @@ class CustomListTile extends StatelessWidget {
             color: AppColors.white, borderRadius: BorderRadius.circular(7)),
         child: ListTile(
           leading: Icon(icon, size: 25, color: iconColor),
-          title: Text(
-            title,
-            style:
-                AppFontStyle.mediumBoldTextStyle().copyWith(color: textColor),
-          ),
+          title: Text(title,
+              style: AppFontStyle.mediumBoldTextStyle()
+                  .copyWith(color: textColor)),
         ),
       ),
     );

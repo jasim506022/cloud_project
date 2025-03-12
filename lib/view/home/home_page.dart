@@ -1,8 +1,7 @@
-import 'package:cloud_project/res/app_function.dart';
-
 import 'package:flutter/material.dart';
 
-import '../../model/data.dart';
+import '../../data/apps_data.dart';
+import '../../res/app_function.dart';
 import '../../widget/app_footer_widget.dart';
 import 'widget/category_item_widget.dart';
 import 'widget/limited_offer_widget.dart';
@@ -41,10 +40,10 @@ class _HomePageState extends State<HomePage>
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
+                children: [
                   const ProductFeatureWidget(),
                   AppFunction.verticalSpace(30),
-                  _cateryList(),
+                  _buildCategoryList(),
                   AppFunction.verticalSpace(30),
                   const ProductPromotionOverviewWidget(),
                   AppFunction.verticalSpace(50),
@@ -64,7 +63,8 @@ class _HomePageState extends State<HomePage>
     );
   }
 
-  ListView _cateryList() {
+  /// CategoryList
+  ListView _buildCategoryList() {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
       itemCount: AppsData.categoriesList.length,

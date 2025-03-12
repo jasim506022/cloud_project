@@ -16,11 +16,8 @@ class ProductWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: AppColors.white,
       elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -31,6 +28,7 @@ class ProductWidget extends StatelessWidget {
     );
   }
 
+// Product Image
   Widget _buildProductImage() {
     return Stack(
       children: [
@@ -40,10 +38,7 @@ class ProductWidget extends StatelessWidget {
             color: AppColors.lightGrey,
             child: AspectRatio(
               aspectRatio: 4 / 3,
-              child: Image.asset(
-                productModel.image.first,
-                fit: BoxFit.contain,
-              ),
+              child: Image.asset(productModel.image.first, fit: BoxFit.contain),
             ),
           ),
         ),
@@ -53,7 +48,8 @@ class ProductWidget extends StatelessWidget {
           child: Container(
             height: 40,
             width: 40,
-            color: AppColors.white,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8), color: AppColors.white),
             child: const Icon(Icons.arrow_drop_down),
           ),
         )
@@ -61,25 +57,22 @@ class ProductWidget extends StatelessWidget {
     );
   }
 
+// Product Information
   Padding _buildProductInfo() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            productModel.title,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
-            style: AppFontStyle.mediumBoldTextStyle()
-                .copyWith(color: AppColors.blue),
-          ),
+          Text(productModel.title,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: AppFontStyle.mediumBoldTextStyle()
+                  .copyWith(color: AppColors.blue)),
           AppFunction.verticalSpace(5),
-          Text(
-            "\$${productModel.price.toStringAsFixed(2)}",
-            style:
-                AppFontStyle.titleTextStyle().copyWith(color: AppColors.blue),
-          ),
+          Text("\$${productModel.price.toStringAsFixed(2)}",
+              style: AppFontStyle.titleTextStyle()
+                  .copyWith(color: AppColors.blue)),
         ],
       ),
     );

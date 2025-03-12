@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../model/data.dart';
+import '../../../data/apps_data.dart';
+import '../../../model/feature_model.dart';
 import '../../../res/app_font_style.dart';
 import '../../../res/app_function.dart';
 import '../../../res/app_image.dart';
@@ -18,35 +19,19 @@ class ProductFeatureWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _productInfo(),
-        _featureList(),
+        _buildProductInfo(),
+        _buildFeatureList(AppsData.mainFeaturesList),
         AppFunction.verticalSpace(15),
-        AppButton(
-          title: AppString.btnShowNow,
-          onTap: () {},
-        ),
+        AppButton(title: AppString.btnShowNow, onTap: () {}),
         AppFunction.verticalSpace(20),
-        _additionalFeatureList()
+        _buildFeatureList(AppsData.additionalFeaturesList,
+            isAdditionFeature: true),
       ],
     );
   }
 
-  ListView _additionalFeatureList() {
-    return ListView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: AppsData.additionalFeaturesList.length,
-      shrinkWrap: true,
-      itemBuilder: (context, index) {
-        var featureModel = AppsData.additionalFeaturesList[index];
-        return FeatureItemWidget(
-          featureModel: featureModel,
-          isAdditionFeature: true,
-        );
-      },
-    );
-  }
-
-  Padding _productInfo() {
+// product info section
+  Padding _buildProductInfo() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 30),
       child: Column(
@@ -63,17 +48,16 @@ class ProductFeatureWidget extends StatelessWidget {
     );
   }
 
-  ListView _featureList() {
+//ListView.builder logic
+  ListView _buildFeatureList(List<FeatureModel> featureData,
+      {bool isAdditionFeature = false}) {
     return ListView.builder(
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: AppsData.featuresList.length,
+      itemCount: featureData.length,
       shrinkWrap: true,
-      itemBuilder: (context, index) {
-        var featureModel = AppsData.featuresList[index];
-        return FeatureItemWidget(
-          featureModel: featureModel,
-        );
-      },
+      itemBuilder: (context, index) => FeatureItemWidget(
+          featureModel: featureData[index],
+          isAdditionFeature: isAdditionFeature),
     );
   }
 }

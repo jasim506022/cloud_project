@@ -5,7 +5,7 @@ import '../res/app_colors.dart';
 import '../res/app_font_style.dart';
 import '../res/app_function.dart';
 import '../res/app_image.dart';
-import '../res/cons.dart';
+import '../res/app_constant.dart';
 
 class AppFooterWidget extends StatelessWidget {
   const AppFooterWidget({
@@ -35,7 +35,7 @@ class AppFooterWidget extends StatelessWidget {
     );
   }
 
-  /// Builds the newsletter subscription section
+  ///  the newsletter subscription section
   Widget _buildSubscriptionSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class AppFooterWidget extends StatelessWidget {
               flex: 2,
               child: Container(
                 height: 50,
-                color: const Color.fromARGB(255, 7, 218, 255),
+                color: AppColors.lightBlue,
                 child: const Icon(Icons.send, color: AppColors.black),
               ),
             ),
@@ -72,28 +72,33 @@ class AppFooterWidget extends StatelessWidget {
     );
   }
 
+//social media icons section
   SizedBox _buildSocialMediaIcons() {
     return SizedBox(
       height: 60,
       width: double.infinity,
-      child: ListView.builder(
-        itemCount: socialMedia.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 7),
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: const BoxDecoration(
-                  color: AppColors.white, shape: BoxShape.circle),
-              child: Padding(
-                padding: const EdgeInsets.all(15),
-                child: Image.asset(socialMedia[index]['asset']!),
-              ),
-            ),
-          );
-        },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: AppConstant.socialMediaIcons
+            .map((social) => _buildSocialMediaIcon(social))
+            .toList(),
+      ),
+    );
+  }
+
+  // Single social media icon
+  Widget _buildSocialMediaIcon(Map<String, String> social) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 7),
+      child: Container(
+        height: 50,
+        width: 50,
+        decoration:
+            const BoxDecoration(color: AppColors.white, shape: BoxShape.circle),
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Image.asset(social['asset']!),
+        ),
       ),
     );
   }
@@ -111,7 +116,7 @@ class AppFooterWidget extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 15),
           child: Divider(height: 1, color: AppColors.grey),
         ),
-        ...categoriesBottom.map((category) => Padding(
+        ...AppConstant.footerCategoris.map((category) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 7),
               child: Text(
                 category,

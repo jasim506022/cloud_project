@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_widget/flutter_carousel_widget.dart';
 
-import '../../../model/data.dart';
+import '../../../data/apps_data.dart';
 import '../../../model/product_model.dart';
 import '../../../res/app_colors.dart';
-import '../../../res/cons.dart';
+import '../../../res/app_constant.dart';
 import 'product_card_widget.dart';
 
 class ProductCategoriesTab extends StatelessWidget {
@@ -21,7 +21,7 @@ class ProductCategoriesTab extends StatelessWidget {
           height: 320,
           child: TabBarView(
             controller: tabController,
-            children: categoryList.map((category) {
+            children: AppConstant.tabCategoryList.map((category) {
               List<ProductModel> filteredProducts = AppsData.productList
                   .where((product) => product.category == category)
                   .toList();
@@ -34,6 +34,7 @@ class ProductCategoriesTab extends StatelessWidget {
     );
   }
 
+//TabBar for category navigation
   SizedBox _buildTabBar() {
     return SizedBox(
       height: 50,
@@ -45,7 +46,9 @@ class ProductCategoriesTab extends StatelessWidget {
           indicator: BoxDecoration(
               borderRadius: BorderRadius.circular(5), color: AppColors.blue),
           controller: tabController,
-          tabs: categoryList.map((category) => Text(category)).toList()),
+          tabs: AppConstant.tabCategoryList
+              .map((category) => Text(category))
+              .toList()),
     );
   }
 
